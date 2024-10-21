@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace TK.ItemCombine.Models
 {
-    public class FA3901_00101_MODEL
+    public class FA3901_00101_MODEL_ADR
     {
         public double FA3901_BS_NR {  get; set; }
         public double FA3901_POOL_NR { get; set; }
         public double FA3901_FREIGABE { get; set; }
-        public string? FA3176_TEXT_INHALT {  get; set; }
         public double FA078_VERS_ST {  get; set; }
         public string SY0010_TELEX {  get; set; }
         public int FA078_ADR_NR { get; set; }

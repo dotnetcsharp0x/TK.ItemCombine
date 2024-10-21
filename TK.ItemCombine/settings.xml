@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<starts>
+	<Timing>600</Timing>
+	<Debug>0</Debug>
+	<PredReserveRoute>99999</PredReserveRoute>
+	<LogPath>C:\\Program Files (x86)\\CSB-System AG\\Reservatation\</LogPath>
+	<LogClearPeriod>5</LogClearPeriod>
+	<Reservation>
+
+		<Routes>
+			<PoolNr>31001</PoolNr>
+			<Description>Короча маршруты</Description>
+			<DaysBefore>1</DaysBefore>
+			<DaysAfter>1</DaysAfter>
+			<HoursFrom>150000</HoursFrom>
+			<HoursTo>235959</HoursTo>
+			<MainKstZam>310400</MainKstZam>
+			<MainKstOhl>310400</MainKstOhl>
+			<Ksts>
+				<OhlKor>310250</OhlKor>
+				<OhlSht>310250</OhlSht>
+				<ZamKor>310250</ZamKor>
+				<Kst>310248</Kst>
+				<ZamSht>310250</ZamSht>
+			</Ksts>
+		</Routes>
+	</Reservation>
+</starts>

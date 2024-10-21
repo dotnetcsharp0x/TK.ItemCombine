@@ -27,6 +27,7 @@ namespace TK.ItemCombine.Models
         public int Timing { get; set; }
         public string? LogPath { get; set; }
         public int LogClearPeriod {  get; set; }
+        public int AdrCombine {  get; set; }
         public bool Debug {  get; set; }
         public int PredReserveRoute {  get; set; }
         public int DaysBefore {  get; set; }

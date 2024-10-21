@@ -25,7 +25,9 @@ namespace TK.ItemCombine.Data
             modelBuilder.Entity<FA3886_00101>().HasKey(u => new { u.FA3886_PROG_NR, u.FA3886_AUSW_NR, u.FA3886_PRIO,u.FA3886_ART_KOMM_ID,u.FA3886_SORT_NR,u.FA3886_ART_NR,u.FA3886_SORT_NR_2, u.FA3886_BS_NR,u.FA3886_BS_SUB_NR,u.FA3886_TYP,u.FA3886_POSTEN_ID });
             modelBuilder.Entity<FA0078_00112>().HasNoKey();
             modelBuilder.Entity<FA3901_00101>().HasNoKey();
+            modelBuilder.Entity<SY8529_00101>().HasNoKey();
             modelBuilder.Entity<FA0077_00114>().HasNoKey();
+            modelBuilder.Entity<ITEMCOMBINE>().HasNoKey();
             modelBuilder.Entity<LA0054_00107>().HasNoKey();
             modelBuilder.Entity<SY8081_00104>().HasNoKey();
             modelBuilder.Entity<SY0012_00110>().HasNoKey();
@@ -42,6 +44,8 @@ namespace TK.ItemCombine.Data
         public DbSet<SY8249_00104> SY8249_00104 { get; set; }
         public DbSet<SY8581_00106> SY8581_00106 { get; set; }
         public DbSet<FA3886_00101> FA3886_00101 { get; set; }
+        public DbSet<SY8529_00101> SY8529_00101 { get; set; }
+        public DbSet<ITEMCOMBINE> ITEMCOMBINE { get; set; }
 
         ~AppDbContext()
         {
