@@ -8,20 +8,19 @@
 	<Reservation>
 
 		<Routes>
-			<PoolNr>31001</PoolNr>
-			<Description>Короча маршруты</Description>
+			<PoolNr>34001</PoolNr>
+			<Description>ВЛГ маршруты</Description>
 			<DaysBefore>1</DaysBefore>
 			<DaysAfter>1</DaysAfter>
-			<HoursFrom>150000</HoursFrom>
+			<HoursFrom>000001</HoursFrom>
 			<HoursTo>235959</HoursTo>
-			<MainKstZam>310400</MainKstZam>
-			<MainKstOhl>310400</MainKstOhl>
+			<MainKstZam>340400</MainKstZam>
+			<MainKstOhl>340410</MainKstOhl>
 			<Ksts>
-				<OhlKor>310250</OhlKor>
-				<OhlSht>310250</OhlSht>
-				<ZamKor>310250</ZamKor>
-				<Kst>310248</Kst>
-				<ZamSht>310250</ZamSht>
+				<OhlKor>340281</OhlKor>
+				<OhlSht>3340286</OhlSht>
+				<ZamKor>340280</ZamKor>
+				<ZamSht>340285</ZamSht>
 			</Ksts>
 		</Routes>
 	</Reservation>

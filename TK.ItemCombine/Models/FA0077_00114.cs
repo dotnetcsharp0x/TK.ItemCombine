@@ -25,6 +25,5 @@ namespace TK.ItemCombine.Models
         public double FA077_LAGER {  get; set; }
         public string FA077_ME_1 {  get; set; }
         public double FA077_ZURUECK {  get; set; }
-
     }
 }
