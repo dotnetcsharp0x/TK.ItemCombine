@@ -272,6 +272,7 @@ namespace TK.ItemCombine
                                     File.Delete(file);
                                 }
                             }
+                        Console.WriteLine("start");
                             await new RunReservation().CombineManual(_prm);
                         
                         await Task.Delay(TimeSpan.FromSeconds(_prm.Timing));

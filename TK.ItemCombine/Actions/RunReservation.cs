@@ -348,6 +348,7 @@ namespace TK.ItemCombine.Actions
 
         public async Task<double?> CombineManual(Params? prm)
         {
+            Console.WriteLine("s");
             #region CreateMainObject
             List<FA3901_00101_MODEL_MANUAL>? FA3901 = new List<FA3901_00101_MODEL_MANUAL>();
             List<ITEMCOMBINE>? ITEMCOMBINE_ = new List<ITEMCOMBINE>();
@@ -359,12 +360,14 @@ namespace TK.ItemCombine.Actions
             var connectionString = configuration.GetConnectionString("csbContext").ToString();
             using (IDbConnection db = new OracleConnection(connectionString))
             {
-                var sql_get_polled_orders = "select OrderNr,DateCreated,DateUpdated from tkmiratorg.ITEMCOMBINE, TKMIRATORG.FA0704_00105, TKMIRATORG.fa0706_00110 WHERE DateUpdated = '0' "+
+                var sql_get_polled_orders = "select OrderNr,DateCreated,DateUpdated from tkmiratorg.ITEMCOMBINE, TKMIRATORG.FA0704_00105, TKMIRATORG.fa0706_00110 WHERE DateUpdated = '0' " +
                     " AND FA704_VERSANDSTELLE = FA706_VERSANDSTELLE" +
                     " AND FA704_TOURNUMMER = FA706_TOURNUMMER" +
                     " AND FA704_VERLADEDATUM = FA706_VERLADEDATUM" +
                     " AND OrderNr = FA706_BS_NR" +
-                    " AND FA704_LADE_KST_3 between 0 and 999351";
+                    " AND FA704_LADE_KST_3 between 0 and 999351" +
+                    " AND DateUpdated = 0" +
+                    " AND PoolNr = " + ausw_nr;
                 ITEMCOMBINE_ = db.Query<ITEMCOMBINE>(sql_get_polled_orders).ToList();
                 if (ITEMCOMBINE_.Count > 0)
                 {
@@ -380,9 +383,13 @@ namespace TK.ItemCombine.Actions
                         "WHERE FA3901_POOL_NR = " + ausw_nr + " " +
                         "AND FA3901_FREIGABE = 1 ";
                     var sql2 = sql1 + " AND FA3901_BS_NR IN ( ";
-                    foreach (var item in ITEMCOMBINE_)
+
+                    foreach (var item in ITEMCOMBINE_.Distinct())
                     {
                         sql2 = sql2 + item.OrderNr + ", ";
+                        Console.WriteLine("");
+                        Console.WriteLine(sql2);
+                        Console.WriteLine("");
                     }
                     sql2 = sql2 + " )";
                     var sql3 = " " +
@@ -391,7 +398,7 @@ namespace TK.ItemCombine.Actions
                     var sql = sql2 + sql3;
                     sql = sql.Replace(",  )", " )");
                     FA3901 = db.Query<FA3901_00101_MODEL_MANUAL>(sql).ToList();
-                    foreach(var item in FA3901)
+                    foreach (var item in FA3901)
                     {
                         DateTime now = DateTime.Now;
                         string split_new = $"{now:u}";
