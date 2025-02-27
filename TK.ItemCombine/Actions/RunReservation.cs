@@ -87,7 +87,7 @@ namespace TK.ItemCombine.Actions
                         "FROM tkmiratorg.SY8529_00101 " +
                         "where sy8529_sortgr_titel = 3" +
                         "";
-                    var BS_NR = db.Query<FA3886_00101>("SELECT * FROM tkmiratorg.FA3886_00101").AsQueryable().AsNoTracking().ToList();
+                    var BS_NR = db.Query<FA3886_00101>("SELECT * FROM tkmiratorg.FA3886_00101_ITEM").AsQueryable().AsNoTracking().ToList();
                     FA3901 = FA3901.Where(l => !BS_NR.Any(e => e.FA3886_BS_NR == l.FA3901_BS_NR)).AsQueryable().AsNoTracking().ToList();
                     if (FA3901.Count != 0)
                     {
