@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TK.ItemCombine.Models
+namespace TK.ItemCombineFA3886Pull.Models
 {
     public class FA3886_00101
     {

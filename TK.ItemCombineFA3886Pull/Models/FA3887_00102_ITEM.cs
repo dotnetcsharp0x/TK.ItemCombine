@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TK.ItemCombine.Models
+namespace TK.ItemCombineFA3886Pull.Models
 {
-    public class FA3887_00102
+    public class FA3887_00102_ITEM
     {
         public double FA3887_PROG_NR {  get; set; }
         public double FA3887_AUSW_NR {  get; set; }
@@ -41,5 +41,6 @@ namespace TK.ItemCombine.Models
         public double FA3887_ANL_STATION {  get; set; }
         public double FA3887_UPD_STATION {  get; set; }
         public string FA3887_X_FELD_2 {  get; set; }
+        public double IMPORT {  get; set; }
     }
 }

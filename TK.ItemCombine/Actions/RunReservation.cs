@@ -87,7 +87,7 @@ namespace TK.ItemCombine.Actions
                         "FROM tkmiratorg.SY8529_00101 " +
                         "where sy8529_sortgr_titel = 3" +
                         "";
-                    var BS_NR = db.Query<FA3886_00101>("SELECT * FROM tkmiratorg.FA3886_00101_ITEM").AsQueryable().AsNoTracking().ToList();
+                    var BS_NR = db.Query<FA3886_00101_ITEM>("SELECT * FROM tkmiratorg.FA3886_00101_ITEM").AsQueryable().AsNoTracking().ToList();
                     FA3901 = FA3901.Where(l => !BS_NR.Any(e => e.FA3886_BS_NR == l.FA3901_BS_NR)).AsQueryable().AsNoTracking().ToList();
                     if (FA3901.Count != 0)
                     {
@@ -102,8 +102,12 @@ namespace TK.ItemCombine.Actions
                             // Группировка артикулов в заказах по признаку артикул + дата
                             var ids = new_3901.Select(x => x.FA3901_BS_NR);
                             var query = "select FA077_BS_NR,FA077_BS_SUB_NR,FA077_NR,FA077_ART_NR, FA077_HBK_DATUM, FA077_KAT_GRP_NR, FA077_LS_RET_GRUND, FA3902_ZUORD_NR, FA078_TOUR_NR, FA078_VERLADEDATUM " +
-                            "from tkmiratorg.FA0077_00114, TKMIRATORG.FA3902_00101, TKMIRATORG.FA0078_00112 " +
-                            "where FA077_LS_RET_GRUND = 1 AND FA077_BS_NR = FA3902_BS_NR AND FA077_BS_SUB_NR = FA3902_BS_SUB_NR AND FA077_BS_NR = FA078_BS_NR " +
+                            "from tkmiratorg.FA0077_00114, TKMIRATORG.FA0078_00112 " +
+                            "left outer join (" +
+                            "select MAX(FA3902_ZUORD_NR) FA3902_ZUORD_NR,FA3902_BS_NR,FA3902_BS_SUB_NR from TKMIRATORG.FA3902_00101 WHERE FA3902_ZUORD_NR > 0 " +
+                            "GROUP BY FA3902_BS_NR,FA3902_BS_SUB_NR) " +
+                            "FA3902 on FA3902.FA3902_BS_NR = FA078_BS_NR AND FA3902.FA3902_BS_SUB_NR = FA078_BS_SUB_NR " +
+                            "where FA077_LS_RET_GRUND = 1 AND FA077_BS_NR = FA078_BS_NR " +
                             "AND FA077_BS_SUB_NR = FA078_BS_SUB_NR " +
                             "AND FA078_VERS_ST = " + item.Key.FA078_VERS_ST + " " +
                             "AND FA077_BS_NR in ( ";
@@ -117,7 +121,7 @@ namespace TK.ItemCombine.Actions
                             var items_group = items.GroupBy(x => new { x.FA077_ART_NR, x.FA077_HBK_DATUM, x.FA077_KAT_GRP_NR, x.FA3902_ZUORD_NR, x.FA078_VERLADEDATUM, x.FA078_TOUR_NR });
                             // добавить разбивку по терм состоянию. Сперва охл
                             // На форму арт компл. добавить кнопку для показа детальной информации по суммарной фикс. позиции
-                            List<FA3886_00101> FA3886_00101_ = new List<FA3886_00101>();
+                            List<FA3886_00101_ITEM> FA3886_00101_ = new List<FA3886_00101_ITEM>();
                             int MAX_ID = db.Query<int>("SELECT NVL(max(FA3886_ART_KOMM_ID), 0) FA3886_ART_KOMM_ID FROM tkmiratorg.FA3886_00101").First();
                             int MAX_OBER_ID = db.Query<int>("SELECT NVL(max(FA3887_OBER_ID), 0) FA3887_OBER_ID FROM tkmiratorg.FA3887_00102").First();
                             int MAX_AUTO = db.Query<int>("SELECT NVL(max(FA3886_AUTO_INC), 0) FA3886_ART_KOMM_ID FROM tkmiratorg.FA3886_00101").First();
@@ -146,16 +150,16 @@ namespace TK.ItemCombine.Actions
                                 Console.WriteLine(item.Key);
 
                                 Console.WriteLine(id.Key.FA3902_ZUORD_NR + " " + id.Key.FA078_VERLADEDATUM + " " + id.Key.FA078_TOUR_NR + " " + MAX_OBER_ID);
-                                var OBER_ID = db.Query<FA3887_00102>("select * from TKMIRATORG.FA3887_00102 WHERE FA3887_AUSW_NR = " + ausw_nr + " AND FA3887_ART_KOMM_ID = " + MAX_ID).FirstOrDefault();
+                                var OBER_ID = db.Query<FA3887_00102_ITEM>("select * from TKMIRATORG.FA3887_00102 WHERE FA3887_AUSW_NR = " + ausw_nr + " AND FA3887_ART_KOMM_ID = " + MAX_ID).FirstOrDefault();
                                 if (OBER_ID == null)
                                 {
-                                    FA3887_00102 FA3887 = new FA3887_00102();
+                                    FA3887_00102_ITEM FA3887 = new FA3887_00102_ITEM();
                                     FA3887.FA3887_PROG_NR = 3901;
                                     FA3887.FA3887_AUSW_NR = ausw_nr;
                                     FA3887.FA3887_OBER_ID = MAX_OBER_ID;
                                     FA3887.FA3887_ART_KOMM_ID = MAX_ID;
                                     FA3887.FA3887_PRIO = 100;
-                                    FA3887.FA3887_ZUOR_TYP = 0;
+                                    FA3887.FA3887_ZUORD_TYP = 0;
                                     FA3887.FA3887_ZUORDNUNG = id.Key.FA3902_ZUORD_NR;
                                     FA3887.FA3887_ANL_DATUM = Convert.ToInt32(DateTime.Now.ToString("yyyyMMdd")); ;
                                     FA3887.FA3887_ANL_ZEIT = Convert.ToInt32(DateTime.Now.ToString("HHmmss"));
@@ -181,6 +185,7 @@ namespace TK.ItemCombine.Actions
                                     FA3887.FA3887_TEIL_ZUORD_TYP = 0;
                                     FA3887.FA3887_TEIL_ZUORDNUNG = 0;
                                     FA3887.FA3887_X_FELD_2 = " ";
+                                    FA3887.IMPORT = 0;
                                     db.BulkInsert(FA3887);
                                 }
                                 foreach (var ed in items)
@@ -190,7 +195,7 @@ namespace TK.ItemCombine.Actions
                                     && ed.FA078_VERLADEDATUM == id.Key.FA078_VERLADEDATUM && ed.FA078_TOUR_NR == id.Key.FA078_TOUR_NR)
                                     {
                                         Console.WriteLine("OrderNr: " + ed.FA077_BS_NR + " posNr: " + ed.FA077_NR);
-                                        FA3886_00101 new_id = new FA3886_00101();
+                                        FA3886_00101_ITEM new_id = new FA3886_00101_ITEM();
                                         new_id.FA3886_PROG_NR = 3901;
                                         new_id.FA3886_AUSW_NR = ausw_nr;
                                         new_id.FA3886_PRIO = 100;
@@ -221,6 +226,7 @@ namespace TK.ItemCombine.Actions
                                         new_id.FA3886_FREIE_NR_1 = ed.FA3902_ZUORD_NR;
                                         MAX_AUTO++;
                                         new_id.FA3886_AUTO_INC = MAX_AUTO;
+                                        new_id.IMPORT = 0;
                                         FA3886_00101_.Add(new_id);
                                     }
                                 }
