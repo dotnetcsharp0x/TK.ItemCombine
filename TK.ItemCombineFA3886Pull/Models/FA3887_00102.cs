@@ -14,7 +14,7 @@ namespace TK.ItemCombineFA3886Pull.Models
         public double FA3887_AUSW_NR {  get; set; }
         public double FA3887_PRIO {  get; set; }
         public double FA3887_ART_KOMM_ID {  get; set; }
-        public double FA3887_ZUOR_TYP {  get; set; }
+        public double FA3887_ZUORD_TYP {  get; set; }
         public double FA3887_ZUORDNUNG {  get; set; }
         public double FA3887_ANL_DATUM {  get; set; }
         public double FA3887_ANL_ZEIT {  get; set; }

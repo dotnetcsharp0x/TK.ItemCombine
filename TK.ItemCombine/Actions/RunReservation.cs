@@ -13,7 +13,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TK.ItemCombine.Data;
 using TK.ItemCombine.Models;
-using Z.Dapper.Plus;
 
 namespace TK.ItemCombine.Actions
 {
@@ -186,7 +185,74 @@ namespace TK.ItemCombine.Actions
                                     FA3887.FA3887_TEIL_ZUORDNUNG = 0;
                                     FA3887.FA3887_X_FELD_2 = " ";
                                     FA3887.IMPORT = 0;
-                                    db.BulkInsert(FA3887);
+                                    var sql_inserted = "INSERT INTO TKMIRATORG.FA3887_00102_ITEM (" +
+                            "FA3887_PROG_NR" +
+                            ", FA3887_AUSW_NR" +
+                            ", FA3887_PRIO" +
+                            ", FA3887_ART_KOMM_ID" +
+                            ", FA3887_ZUORD_TYP" +
+                            ", FA3887_ZUORDNUNG" +
+                            ", FA3887_ANL_DATUM" +
+                            ", FA3887_ANL_ZEIT" +
+                            ", FA3887_ANL_USER" +
+                            ", FA3887_ANL_PROG" +
+                            ", FA3887_ANL_FKT" +
+                            ", FA3887_UPD_DATUM" +
+                            ", FA3887_UPD_ZEIT" +
+                            ", FA3887_UPD_USER" +
+                            ", FA3887_UPD_PROG" +
+                            ", FA3887_UPD_FKT" +
+                            ", FA3887_FREIGABE" +
+                            ", FA3887_STAT_IN_BEARB" +
+                            ", FA3887_X_FELD_1" +
+                            ", FA3887_OBER_ID" +
+                            ", FA3887_SORTER_LINIE" +
+                            ", FA3887_BEARBEITET" +
+                            ", FA3887_PAZ" +
+                            ", FA3887_ANZ_ART" +
+                            ", FA3887_VOLL_ZUORD_TYP" +
+                            ", FA3887_VOLL_ZUORDNUNG" +
+                            ", FA3887_TEIL_ZUORD_TYP" +
+                            ", FA3887_TEIL_ZUORDNUNG" +
+                            ", FA3887_ANL_STATION" +
+                            ", FA3887_UPD_STATION" +
+                            ", FA3887_X_FELD_2" +
+                            ", IMPORT) " +
+                            "VALUES (" +
+                            ":FA3887_PROG_NR" +
+                            ", :FA3887_AUSW_NR" +
+                            ", :FA3887_PRIO" +
+                            ", :FA3887_ART_KOMM_ID" +
+                            ", :FA3887_ZUORD_TYP" +
+                            ", :FA3887_ZUORDNUNG" +
+                            ", :FA3887_ANL_DATUM" +
+                            ", :FA3887_ANL_ZEIT" +
+                            ", :FA3887_ANL_USER" +
+                            ", :FA3887_ANL_PROG" +
+                            ", :FA3887_ANL_FKT" +
+                            ", :FA3887_UPD_DATUM" +
+                            ", :FA3887_UPD_ZEIT" +
+                            ", :FA3887_UPD_USER" +
+                            ", :FA3887_UPD_PROG" +
+                            ", :FA3887_UPD_FKT" +
+                            ", :FA3887_FREIGABE" +
+                            ", :FA3887_STAT_IN_BEARB" +
+                            ", :FA3887_X_FELD_1" +
+                            ", :FA3887_OBER_ID" +
+                            ", :FA3887_SORTER_LINIE" +
+                            ", :FA3887_BEARBEITET" +
+                            ", :FA3887_PAZ" +
+                            ", :FA3887_ANZ_ART" +
+                            ", :FA3887_VOLL_ZUORD_TYP" +
+                            ", :FA3887_VOLL_ZUORDNUNG" +
+                            ", :FA3887_TEIL_ZUORD_TYP" +
+                            ", :FA3887_TEIL_ZUORDNUNG" +
+                            ", :FA3887_ANL_STATION" +
+                            ", :FA3887_UPD_STATION" +
+                            ", :FA3887_X_FELD_2" +
+                            ", :IMPORT) ";
+                                    var rowsAffected2 = db.Execute(sql_inserted, FA3887);
+                                    Console.WriteLine($"{rowsAffected2} row(s) inserted.");
                                 }
                                 foreach (var ed in items)
                                 {
@@ -232,7 +298,70 @@ namespace TK.ItemCombine.Actions
                                 }
                                 MAX_ID++;
                             }
-                            db.BulkInsert(FA3886_00101_);
+                            string sql_insert = "INSERT INTO TKMIRATORG.FA3886_00101_ITEM (" +
+                            "FA3886_PROG_NR" +
+                            ", FA3886_AUSW_NR" +
+                            ", FA3886_PRIO" +
+                            ", FA3886_ART_KOMM_ID" +
+                            ", FA3886_SORT_NR" +
+                            ", FA3886_ART_NR" +
+                            ", FA3886_SORT_NR_2" +
+                            ", FA3886_BS_NR" +
+                            ", FA3886_BS_SUB_NR" +
+                            ", FA3886_TYP" +
+                            ", FA3886_POSTEN_ID" +
+                            ", FA3886_ZUORD_TYP" +
+                            ", FA3886_ZUORDNUNG" +
+                            ", FA3886_AUTO_INC" +
+                            ", FA3886_RELEASE" +
+                            ", FA3886_ANL_DATUM" +
+                            ", FA3886_ANL_ZEIT" +
+                            ", FA3886_ANL_USER" +
+                            ", FA3886_ANL_PROG" +
+                            ", FA3886_ANL_FKT" +
+                            ", FA3886_UPD_DATUM" +
+                            ", FA3886_UPD_ZEIT" +
+                            ", FA3886_UPD_USER" +
+                            ", FA3886_UPD_PROG" +
+                            ", FA3886_UPD_FKT" +
+                            ", FA3886_FREIGABE" +
+                            ", FA3886_STAT_IN_BEARB" +
+                            ", FA3886_BEARB_LFD_NR" +
+                            ", FA3886_FREIE_NR_1" +
+                            ", IMPORT) " +
+                            "VALUES (" +
+                            ":FA3886_PROG_NR" +
+                            ", :FA3886_AUSW_NR" +
+                            ", :FA3886_PRIO" +
+                            ", :FA3886_ART_KOMM_ID" +
+                            ", :FA3886_SORT_NR" +
+                            ", :FA3886_ART_NR" +
+                            ", :FA3886_SORT_NR_2" +
+                            ", :FA3886_BS_NR" +
+                            ", :FA3886_BS_SUB_NR" +
+                            ", :FA3886_TYP" +
+                            ", :FA3886_POSTEN_ID" +
+                            ", :FA3886_ZUORD_TYP" +
+                            ", :FA3886_ZUORDNUNG" +
+                            ", :FA3886_AUTO_INC" +
+                            ", :FA3886_RELEASE" +
+                            ", :FA3886_ANL_DATUM" +
+                            ", :FA3886_ANL_ZEIT" +
+                            ", :FA3886_ANL_USER" +
+                            ", :FA3886_ANL_PROG" +
+                            ", :FA3886_ANL_FKT" +
+                            ", :FA3886_UPD_DATUM" +
+                            ", :FA3886_UPD_ZEIT" +
+                            ", :FA3886_UPD_USER" +
+                            ", :FA3886_UPD_PROG" +
+                            ", :FA3886_UPD_FKT" +
+                            ", :FA3886_FREIGABE" +
+                            ", :FA3886_STAT_IN_BEARB" +
+                            ", :FA3886_BEARB_LFD_NR" +
+                            ", :FA3886_FREIE_NR_1" +
+                            ", :IMPORT)";
+                            var rowsAffected = db.Execute(sql_insert, FA3886_00101_);
+                            Console.WriteLine($"{rowsAffected} row(s) inserted.");
                             Console.WriteLine(MAX_ID);
                         }
                     }
